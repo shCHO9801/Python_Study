@@ -1,0 +1,4 @@
+SELECT e.name, b.bonus
+FROM employee e left join bonus b
+on e.empID = b.empId
+WHERE coalesce(b.bonus,0) < 1000
