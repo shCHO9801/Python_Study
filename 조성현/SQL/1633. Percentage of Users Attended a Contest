@@ -1,0 +1,7 @@
+SELECT contest_id, ROUND((count(1)/cnt1)*100, 2) as percentage
+FROM Register,(
+    SELECT count(1) as cnt1
+    FROM Users
+) AS count_users
+GROUP BY 1
+ORDER BY 2 desc, 1
