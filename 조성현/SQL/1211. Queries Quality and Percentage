@@ -1,0 +1,12 @@
+SELECT Q.query_name, 
+ROUND(SUM(Q.rating / Q.position)/C.query_count, 2) as quality,
+ROUND((SUM(CASE WHEN Q.rating<3 THEN 1 ELSE 0 END)/C.query_count)*100, 2) as poor_query_percentage
+FROM Queries Q LEFT JOIN
+(
+    SELECT query_name, count(1) as query_count
+    FROM Queries
+    GROUP BY 1
+) AS C
+ON Q.query_name = C.query_name
+WHERE Q.query_name is not null
+GROUP BY 1
