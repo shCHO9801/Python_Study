@@ -1,0 +1,7 @@
+SELECT A.teacher_id, count(1) as cnt
+FROM (
+    SELECT DISTINCT teacher_id, subject_id
+    FROM Teacher
+) A
+GROUP BY 1
+
