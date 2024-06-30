@@ -1,0 +1,11 @@
+WITH base as (
+    Select p.product_name, o.order_date, o.unit
+    FROM Products P left join Orders O
+    ON P.product_id = O.product_id
+    WHERE YEAR(O.order_date ) = 2020
+    AND MONTH(O.order_date) = 2
+)
+SELECT product_name, sum(unit) as unit
+FROM base
+GROUP BY 1
+Having sum(unit) >= 100
